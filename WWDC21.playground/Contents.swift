@@ -22,6 +22,8 @@ Your current gas level is displayed in the bottom left of the screen. Your gas d
   Credits to Vecteezy.com for gas can, gas meter, gas pump, and light pole assets.
  
 Credits to Kenney.nl for car, road, rock, and foliage assets.
+ 
+ Credits to Mixkit for original sound effects.
  */
 
 loadPrgm(true)
