@@ -6,8 +6,10 @@ class GameScene: SKScene {
     
     var soundtrackAudioPlayer = AVAudioPlayer()
     var hazardsfxAudioPlayer = AVAudioPlayer()
+//    2 gas players in case one is being used already
     var gassfxAudioPlayer = AVAudioPlayer()
     var gassfxAudioPlayer2 = AVAudioPlayer()
+    
     var gameHasStarted : Bool = false
     var gameIsOver : Bool = false
     // represents starting gas level 40
@@ -66,6 +68,8 @@ class GameScene: SKScene {
     var gameOverReason : SKLabelNode?
 
     override func didMove(to view: SKView) {
+        
+//        DEFINES AUDIO PLAYERS
         let soundtrack = Bundle.main.path(forResource: "greendale", ofType: "mp3")
         do {
             soundtrackAudioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundtrack!))
@@ -154,12 +158,13 @@ class GameScene: SKScene {
         }
         if event.keyCode == 123 {
             if car!.position.x >=  -676.5089721679688 && car!.position.x < 1172.4818115234375 {
-                moveCar(moveByX: -400, moveByY: 0, forTheKey: "left")
+                moveSprite(node: car!, moveByX: -400, moveByY: 0, forTheKey: "left", duration: 0.3)
             }
         }
         if event.keyCode == 124 {
             if car!.position.x >  -1076.5091552734375 && car!.position.x < 774.0081176757812 {
-            moveCar(moveByX: 400, moveByY: 0, forTheKey: "right")
+                moveSprite(node: car!, moveByX: 400, moveByY: 0, forTheKey: "right", duration: 0.3)
+
             }
         }
     }
@@ -169,13 +174,6 @@ class GameScene: SKScene {
         let seq = SKAction.sequence([moveAction])
 
         node.run(seq, withKey: forTheKey)
-    }
-    
-    func moveCar (moveByX: CGFloat, moveByY: CGFloat, forTheKey: String) {
-        let moveAction = SKAction.moveBy(x: moveByX, y: moveByY, duration: 0.3)
-        let seq = SKAction.sequence([moveAction])
-
-        car!.run(seq, withKey: forTheKey)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -485,6 +483,8 @@ class GameScene: SKScene {
             print(gasMeter)
             print( "gas1")
         }
+//        ENDS GAME ON HAZARD INTERSECTION
+        
         if car!.intersects(hazard1!) && gameOverCount == 0  {
             soundtrackAudioPlayer.stop()
             hazardsfxAudioPlayer.play()
