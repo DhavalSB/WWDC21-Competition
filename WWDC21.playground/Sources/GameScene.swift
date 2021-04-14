@@ -10,6 +10,8 @@ class GameScene: SKScene {
     var gassfxAudioPlayer = AVAudioPlayer()
     var gassfxAudioPlayer2 = AVAudioPlayer()
     
+    let roadTextures = ["Road", "RoadT2", "RoadT3", "Road"]
+    
     var gameHasStarted : Bool = false
     var gameIsOver : Bool = false
     // represents starting gas level 40
@@ -26,6 +28,10 @@ class GameScene: SKScene {
     var endTimer : Timer?
     
     var background : SKSpriteNode?
+    var section1 : SKSpriteNode?
+    var section2 : SKSpriteNode?
+    var section3 :SKSpriteNode?
+    var section4 : SKSpriteNode?
     var car : SKSpriteNode?
     
     var gas1 : SKSpriteNode?
@@ -43,6 +49,16 @@ class GameScene: SKScene {
     var gas13 : SKSpriteNode?
     var gas14 : SKSpriteNode?
     var gas15 : SKSpriteNode?
+    var gas16 : SKSpriteNode?
+    var gas17 : SKSpriteNode?
+    var gas18 : SKSpriteNode?
+    var gas19 : SKSpriteNode?
+    var gas20 : SKSpriteNode?
+    var gas21 : SKSpriteNode?
+    var gas22 : SKSpriteNode?
+    var gas23 : SKSpriteNode?
+    var gas24 : SKSpriteNode?
+
     
     var hazard1 : SKSpriteNode?
     var hazard2 : SKSpriteNode?
@@ -130,15 +146,34 @@ class GameScene: SKScene {
         gas13 = childNode(withName: "//Gas13") as? SKSpriteNode
         gas14 = childNode(withName: "//Gas14") as? SKSpriteNode
         gas15 = childNode(withName: "//Gas15") as? SKSpriteNode
+        gas16 = childNode(withName: "//Gas16") as? SKSpriteNode
+        gas17 = childNode(withName: "//Gas17") as? SKSpriteNode
+        gas18 = childNode(withName: "//Gas18") as? SKSpriteNode
+        gas19 = childNode(withName: "//Gas19") as? SKSpriteNode
+        gas20 = childNode(withName: "//Gas20") as? SKSpriteNode
+        gas21 = childNode(withName: "//Gas21") as? SKSpriteNode
+        gas22 = childNode(withName: "//Gas22") as? SKSpriteNode
+        gas23 = childNode(withName: "//Gas23") as? SKSpriteNode
+        gas24 = childNode(withName: "//Gas24") as? SKSpriteNode
         gasTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(useGas), userInfo: nil, repeats: true)
         gasIndicator = childNode(withName: "Indicator") as? SKSpriteNode
         endTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countEndSeconds), userInfo: nil, repeats: true)
         gmBackground = childNode(withName: "Gas Meter Background") as? SKShapeNode
         car = childNode(withName: "Car") as? SKSpriteNode
         background = childNode(withName: "Background") as? SKSpriteNode
+        section1 = childNode(withName: "//Section1") as? SKSpriteNode
+        section2 = childNode(withName: "//Section2") as? SKSpriteNode
+        section3 = childNode(withName: "//Section3") as? SKSpriteNode
+        section4 = childNode(withName: "//Section4") as? SKSpriteNode
         endSign = childNode(withName: "WelcomeSign") as? SKSpriteNode
         gameOverScreen = childNode(withName: "GameOver") as? SKLabelNode
         gameOverReason = childNode(withName: "//gameOverReason") as? SKLabelNode
+        
+        background!.texture = SKTexture(imageNamed: roadTextures.randomElement()!)
+        section1!.texture = background!.texture
+        section2!.texture = background!.texture
+        
+
     }
     
     public override func keyDown(with event: NSEvent) {
@@ -149,10 +184,10 @@ class GameScene: SKScene {
             print(car!.position)
         }
         if event.keyCode == 126 {
-            if background!.position.y == 5000 {
+            if background!.position.y == 18000 {
                 gameHasStarted = true
-                moveSprite(node : background!, moveByX: 0, moveByY: -42500, forTheKey: "forward", duration: 35)
-                moveSprite(node : endSign!, moveByX: 0, moveByY: -42500, forTheKey: "forward", duration: 35)
+                moveSprite(node : background!, moveByX: 0, moveByY: -55260, forTheKey: "forward", duration: 47)
+                moveSprite(node : endSign!, moveByX: 0, moveByY: -55260, forTheKey: "forward", duration: 47)
                 soundtrackAudioPlayer.play()
             }
         }
@@ -195,12 +230,12 @@ class GameScene: SKScene {
             }
         }
         
-        if background!.position.y <= -37499 {
+        if background!.position.y <= -37258 {
             gameIsOver = true
         }
         
 //        STOPS GAS USAGE
-        if background!.position.y <= -25500 {
+        if background!.position.y <= -23500 {
             gameHasStarted = false
             gasIndicator!.run(fadeOut)
             gmBackground!.run(fadeOut)
@@ -224,8 +259,141 @@ class GameScene: SKScene {
          
         
 //        MAKES GAS CAN DISSAPEAR UPON INTERSECTION
-        
-        
+        if car!.intersects(gas24!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas24!.removeFromParent()
+            gas24!.removeAllActions()
+            gas24!.removeAllChildren()
+            gas24!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas23!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas23!.removeFromParent()
+            gas23!.removeAllActions()
+            gas23!.removeAllChildren()
+            gas23!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas22!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas22!.removeFromParent()
+            gas22!.removeAllActions()
+            gas22!.removeAllChildren()
+            gas22!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas21!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas21!.removeFromParent()
+            gas21!.removeAllActions()
+            gas21!.removeAllChildren()
+            gas21!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas20!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas20!.removeFromParent()
+            gas20!.removeAllActions()
+            gas20!.removeAllChildren()
+            gas20!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas19!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas19!.removeFromParent()
+            gas19!.removeAllActions()
+            gas19!.removeAllChildren()
+            gas19!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas18!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas18!.removeFromParent()
+            gas18!.removeAllActions()
+            gas18!.removeAllChildren()
+            gas18!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas17!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas17!.removeFromParent()
+            gas17!.removeAllActions()
+            gas17!.removeAllChildren()
+            gas17!.physicsBody = nil
+            
+        }
+        if car!.intersects(gas16!) {
+            if gassfxAudioPlayer.isPlaying {
+                gassfxAudioPlayer2.play()
+            } else {
+                gassfxAudioPlayer.play()
+            }
+            if (gasMeter <= 4 && gasMeter >= 1) {
+                gasMeter += 1
+            }
+            gas16!.removeFromParent()
+            gas16!.removeAllActions()
+            gas16!.removeAllChildren()
+            gas16!.physicsBody = nil
+            
+        }
         if car!.intersects(gas15!) {
             if gassfxAudioPlayer.isPlaying {
                 gassfxAudioPlayer2.play()
@@ -240,8 +408,6 @@ class GameScene: SKScene {
             gas15!.removeAllChildren()
             gas15!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas15")
         }
         if car!.intersects(gas14!) {
             if gassfxAudioPlayer.isPlaying {
@@ -257,8 +423,6 @@ class GameScene: SKScene {
             gas14!.removeAllChildren()
             gas14!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas14")
         }
         if car!.intersects(gas13!) {
             if gassfxAudioPlayer.isPlaying {
@@ -274,8 +438,7 @@ class GameScene: SKScene {
             gas13!.removeAllChildren()
             gas13!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas13")
+
         }
         if car!.intersects(gas12!) {
             if gassfxAudioPlayer.isPlaying {
@@ -291,8 +454,6 @@ class GameScene: SKScene {
             gas12!.removeAllChildren()
             gas12!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas12")
         }
         if car!.intersects(gas11!) {
             if gassfxAudioPlayer.isPlaying {
@@ -308,8 +469,7 @@ class GameScene: SKScene {
             gas11!.removeAllChildren()
             gas11!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas11")
+
         }
         if car!.intersects(gas10!) {
             if gassfxAudioPlayer.isPlaying {
@@ -325,8 +485,7 @@ class GameScene: SKScene {
             gas10!.removeAllChildren()
             gas10!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas10")
+
         }
         if car!.intersects(gas9!) {
             if gassfxAudioPlayer.isPlaying {
@@ -342,8 +501,6 @@ class GameScene: SKScene {
             gas9!.removeAllChildren()
             gas9!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas9")
         }
         if car!.intersects(gas8!) {
             if gassfxAudioPlayer.isPlaying {
@@ -358,9 +515,7 @@ class GameScene: SKScene {
             gas8!.removeAllActions()
             gas8!.removeAllChildren()
             gas8!.physicsBody = nil
-            
-            print(gasMeter)
-            print( "gas8")
+           
         }
         if car!.intersects(gas3!) {
             if gassfxAudioPlayer.isPlaying {
@@ -375,10 +530,7 @@ class GameScene: SKScene {
             gas3!.removeAllActions()
             gas3!.removeAllChildren()
             gas3!.physicsBody = nil
-            
-            print(gasMeter)
-            print(car!.intersects(gas3!))
-            print( "gas3")
+           
         }
         if car!.intersects(gas7!) {
             if gassfxAudioPlayer.isPlaying {
@@ -394,8 +546,6 @@ class GameScene: SKScene {
             gas7!.removeAllChildren()
             gas7!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas7")
         }
         if car!.intersects(gas6!) {
             if gassfxAudioPlayer.isPlaying {
@@ -410,9 +560,7 @@ class GameScene: SKScene {
             gas6!.removeAllActions()
             gas6!.removeAllChildren()
             gas6!.physicsBody = nil
-            
-            print(gasMeter)
-            print( "gas6")
+           
         }
         if car!.intersects(gas5!) {
             if gassfxAudioPlayer.isPlaying {
@@ -427,9 +575,7 @@ class GameScene: SKScene {
             gas5!.removeAllActions()
             gas5!.removeAllChildren()
             gas5!.physicsBody = nil
-            
-            print(gasMeter)
-            print( "gas5")
+          
         }
         if car!.intersects(gas4!) {
             if gassfxAudioPlayer.isPlaying {
@@ -444,9 +590,7 @@ class GameScene: SKScene {
             gas4!.removeAllActions()
             gas4!.removeAllChildren()
             gas4!.physicsBody = nil
-            
-            print(gasMeter)
-            print( "gas4")
+          
         }
 
         if car!.intersects(gas2!) {
@@ -463,8 +607,7 @@ class GameScene: SKScene {
             gas2!.removeAllChildren()
             gas2!.physicsBody = nil
             
-            print(gasMeter)
-            print( "gas2")
+
         }
         if car!.intersects(gas1!) {
             if gassfxAudioPlayer.isPlaying {
@@ -480,8 +623,7 @@ class GameScene: SKScene {
             gas1!.removeAllActions()
             gas1!.removeAllChildren()
             gas1!.physicsBody = nil
-            print(gasMeter)
-            print( "gas1")
+
         }
 //        ENDS GAME ON HAZARD INTERSECTION
         

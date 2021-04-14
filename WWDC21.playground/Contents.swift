@@ -1,7 +1,7 @@
 /*:
  # WWDC 2021 Playground
 
-### This vertical scrolling experience is about a vehicle low on gas driving on an abandoned road. Avoid obstacles and collect gas along the way to be able to make it to the city successfully.
+### This game is about a vehicle low on gas driving on an abandoned road. Avoid obstacles and collect gas along the way to be able to make it to the city successfully.
  
 ## `To Play:`
  
