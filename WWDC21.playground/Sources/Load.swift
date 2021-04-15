@@ -13,17 +13,7 @@ public func loadPrgm(_ shouldLoad: Bool) {
         s.scaleMode = .aspectFit
         scene = s
     }
-    print("Program successfully loaded in!")
-}
-
-public func showStats() {
-    if let sceneView = sceneView {
-        sceneView.showsFPS = true
-        sceneView.showsNodeCount = true
-        sceneView.showsFields = true
-        sceneView.showsQuadCount = true
-        sceneView.showsDrawCount = true
-    }
+    print("Program loaded")
 }
 
 public var start: Void {

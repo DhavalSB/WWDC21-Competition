@@ -10,7 +10,7 @@ class GameScene: SKScene {
     var gassfxAudioPlayer = AVAudioPlayer()
     var gassfxAudioPlayer2 = AVAudioPlayer()
     
-    let roadTextures = ["Road", "RoadT2", "RoadT3", "Road"]
+    let roadTextures = ["RoadT2", "RoadT3", "Road", "Road"]
     
     var gameHasStarted : Bool = false
     var gameIsOver : Bool = false
