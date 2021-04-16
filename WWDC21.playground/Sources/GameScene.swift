@@ -592,7 +592,6 @@ class GameScene: SKScene {
             gas4!.physicsBody = nil
           
         }
-
         if car!.intersects(gas2!) {
             if gassfxAudioPlayer.isPlaying {
                 gassfxAudioPlayer2.play()
@@ -625,8 +624,8 @@ class GameScene: SKScene {
             gas1!.physicsBody = nil
 
         }
-//        ENDS GAME ON HAZARD INTERSECTION
         
+//        ENDS GAME ON HAZARD INTERSECTION
         if car!.intersects(hazard1!) && gameOverCount == 0  {
             soundtrackAudioPlayer.stop()
             hazardsfxAudioPlayer.play()
